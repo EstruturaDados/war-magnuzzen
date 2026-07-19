@@ -24,11 +24,11 @@
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
-typedef struct{
+struct Territorio {
     char nome[30];
     char cor[10];
     int tropas;
-} Territorio;
+};
 
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
@@ -46,71 +46,39 @@ int main() {
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
-    Territorio territorio[TAM_TERRITORIOS];
-    int opcao;
+    
     int totalTerritorios;
     totalTerritorios = 0;
 
-        do {
-        // Exibe menu de opções
-        printf("==========================================\n");
-        printf("   WAR\n");
-        printf("==========================================\n");
-        printf("1 - Cadastrar Territorios\n");
-        printf("2 - Listar Territorios\n");
-        printf("0 - Sair\n");
-        printf("------------------------------------------\n");
-        printf("Escolha uma opção: \n");
+    printf("Bem-vindo ao Jogo WAR Estruturado!\n");
 
-        // Lê a opção do usuário
-        scanf("%d", &opcao);
+ 
 
-        // Processamento da opção
-        switch (opcao){
-            case 1: // Cadastro dos Territórios
-                printf("------- Cadastro de Novo Territorio ----\n\n");
 
-                if (totalTerritorios < TAM_TERRITORIOS) {
-                    printf("Digite o nome do Territorio: ");
-                    fgets(territorio[totalTerritorios].nome, 30, stdin);
-                    territorio[totalTerritorios].nome[strcspn(territorio[totalTerritorios].nome, "\n")] = '\0';
 
-                    printf("Digite a cor do Territorio: ");
-                    fgets(territorio[totalTerritorios].cor, 10, stdin);
-                    territorio[totalTerritorios].cor[strcspn(territorio[totalTerritorios].cor, "\n")] = '\0';
+        // Cria um vetor com 3 estruturas do tipo 'Aluno'
+    struct Territorio territorio[TAM_TERRITORIOS];
 
-                    printf("Digite a quantidade de tropas: ");
-                    scanf("%d", &territorio[totalTerritorios].tropas);
-                    totalTerritorios++;
+    // O loop 'for' preenche cada struct usando o índice 'i'
+    for (int i = 0; i < TAM_TERRITORIOS; i++) {
+        printf("Digite o nome do território %d: ", i + 1);
+        scanf("%29s", territorio[i].nome);  // Lê o nome do território
+        
+       printf("Digite a cor do exército do território %d: ", i + 1);
+        scanf("%9s", territorio[i].cor);  // Lê a cor do exército
+        
+        printf("Digite o número de tropas do território %d: ", i + 1);
+        scanf("%d", &territorio[i].tropas);  // Lê o número de tropas
 
-                    printf("\nTerritorio cadastrado com sucesso!\n");
-                }
-                break;
+        printf("Territorio cadastrado com sucesso!\n");
 
-            case 2: // Listagem dos Territorios
-                printf("------- Lista Territorios Cadastrados ----\n\n");
-
-                if (totalTerritorios == 0) {
-                    printf("Nenhum territorio cadastrado ainda.\n");
-                } else {
-                    for (int i = 0; i < totalTerritorios; i++) {
-                        printf("=======================================");
-                        printf("TERRITORIO %d\n", i + 1);
-                        printf("Nome: %s\n", territorio[i].nome);
-                        printf("Cor: %s\n", territorio[i].cor);
-                        printf("Tropas: %d\n", territorio[i].tropas);
-                    }
-                    printf("------------------------------");
-                }
-                break;
-
-            case 0: // sair do programa
-                printf("\nSaindo do sistema...\n");
-                break;
-
-        }
+        printf("-----------------------------------\n");
+    }
     
-    } while (opcao != 0);
+    printf("Territórios cadastrados:\n");
+    for (int i = 0; i < TAM_TERRITORIOS; i++) {
+        printf("Território %d: Nome: %s, Cor: %s, Tropas: %d\n", i + 1, territorio[i].nome, territorio[i].cor, territorio[i].tropas);
+    }   
 
 
     // 2. Laço Principal do Jogo (Game Loop):

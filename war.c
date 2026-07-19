@@ -15,12 +15,20 @@
 // ============================================================================
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
+ #include <stdio.h>
+ #include <string.h>
 
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
+#define TAM_TERRITORIOS 5
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
+typedef struct{
+    char nome[30];
+    char cor[10];
+    int tropas;
+} Territorio;
 
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
@@ -38,6 +46,72 @@ int main() {
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
+    Territorio territorio[TAM_TERRITORIOS];
+    int opcao;
+    int totalTerritorios;
+    totalTerritorios = 0;
+
+        do {
+        // Exibe menu de opções
+        printf("==========================================\n");
+        printf("   WAR\n");
+        printf("==========================================\n");
+        printf("1 - Cadastrar Territorios\n");
+        printf("2 - Listar Territorios\n");
+        printf("0 - Sair\n");
+        printf("------------------------------------------\n");
+        printf("Escolha uma opção: \n");
+
+        // Lê a opção do usuário
+        scanf("%d", &opcao);
+
+        // Processamento da opção
+        switch (opcao){
+            case 1: // Cadastro dos Territórios
+                printf("------- Cadastro de Novo Territorio ----\n\n");
+
+                if (totalTerritorios < TAM_TERRITORIOS) {
+                    printf("Digite o nome do Territorio: ");
+                    fgets(territorio[totalTerritorios].nome, 30, stdin);
+                    territorio[totalTerritorios].nome[strcspn(territorio[totalTerritorios].nome, "\n")] = '\0';
+
+                    printf("Digite a cor do Territorio: ");
+                    fgets(territorio[totalTerritorios].cor, 10, stdin);
+                    territorio[totalTerritorios].cor[strcspn(territorio[totalTerritorios].cor, "\n")] = '\0';
+
+                    printf("Digite a quantidade de tropas: ");
+                    scanf("%d", &territorio[totalTerritorios].tropas);
+                    totalTerritorios++;
+
+                    printf("\nTerritorio cadastrado com sucesso!\n");
+                }
+                break;
+
+            case 2: // Listagem dos Territorios
+                printf("------- Lista Territorios Cadastrados ----\n\n");
+
+                if (totalTerritorios == 0) {
+                    printf("Nenhum territorio cadastrado ainda.\n");
+                } else {
+                    for (int i = 0; i < totalTerritorios; i++) {
+                        printf("=======================================");
+                        printf("TERRITORIO %d\n", i + 1);
+                        printf("Nome: %s\n", territorio[i].nome);
+                        printf("Cor: %s\n", territorio[i].cor);
+                        printf("Tropas: %d\n", territorio[i].tropas);
+                    }
+                    printf("------------------------------");
+                }
+                break;
+
+            case 0: // sair do programa
+                printf("\nSaindo do sistema...\n");
+                break;
+
+        }
+    
+    } while (opcao != 0);
+
 
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
@@ -47,6 +121,8 @@ int main() {
     //   - Opção 2: Verifica se a condição de vitória foi alcançada e informa o jogador.
     //   - Opção 0: Encerra o jogo.
     // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
+
+
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.

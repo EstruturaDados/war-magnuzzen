@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug WAR (GDB)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/war",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "miDebuggerArgs": "-q",
+      "setupCommands": [
+        {
+          "description": "Desativar paginação",
+          "text": "set pagination off",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Desativar debuginfod",
+          "text": "set debuginfod enabled off",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "C/C++: gcc arquivo de build ativo"
+    }
+  ]
+}

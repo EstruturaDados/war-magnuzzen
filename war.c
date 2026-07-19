@@ -52,14 +52,11 @@ int main() {
 
     printf("Bem-vindo ao Jogo WAR Estruturado!\n");
 
- 
 
-
-
-        // Cria um vetor com 3 estruturas do tipo 'Aluno'
+    // Cria um vetor com 5 estruturas do tipo Territorio para armazenar os dados de cada território.
     struct Territorio territorio[TAM_TERRITORIOS];
 
-    // O loop 'for' preenche cada struct usando o índice 'i'
+    // Loop para entrada dos dados de cada território
     for (int i = 0; i < TAM_TERRITORIOS; i++) {
         printf("Digite o nome do território %d: ", i + 1);
         scanf("%29s", territorio[i].nome);  // Lê o nome do território
@@ -75,6 +72,7 @@ int main() {
         printf("-----------------------------------\n");
     }
     
+    // Lista os territórios cadastrados
     printf("Territórios cadastrados:\n");
     for (int i = 0; i < TAM_TERRITORIOS; i++) {
         printf("Território %d: Nome: %s, Cor: %s, Tropas: %d\n", i + 1, territorio[i].nome, territorio[i].cor, territorio[i].tropas);
